@@ -18,23 +18,25 @@ jobs:
       run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git 
     - name: build armhf binary
       run: make CROSS_COMPILE="arm-linux-gnueabihf-" all
-    - name: copy armhf bin to output directory
-      run: cp wixlcm bins/wixlcm-armhf
+      working-directory: wixlcm/
+  #  - name: copy armhf bin to output directory
+  #    run: cp wixlcm bins/wixlcm-armhf
     - name: make clean
       run: make clean
     - name: build armel binary
       run: make CROSS_COMPILE="arm-linux-gnueabi-" all
-    - name: copy armel bin to output directory
-      run: cp wixlcm bins/wixlcm-armel
+      working-directory: wixlcm/
+    #- name: copy armel bin to output directory
+    #  run: cp wixlcm bins/wixlcm-armel
     - name: make clean
       run: make clean.
-    - name: set git user name
-      run: git config user.name "workflow@github" 
-    - name: set git user email
-      run: git config user.email "workflow@github"
-    - name: add new files to repo if needed
-      run: git add bins/*
-    - name: commit new files
-      run: git commit -a -m "commit binaries built from latest source" || exit 0
+   # - name: set git user name
+   #   run: git config user.name "workflow@github" 
+   # - name: set git user email
+   #   run: git config user.email "workflow@github"
+   # - name: add new files to repo if needed
+   #   run: git add bins/*
+   # - name: commit new files
+   #   run: git commit -a -m "commit binaries built from latest source" || exit 0
  #   - name: push changes
  #     run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
