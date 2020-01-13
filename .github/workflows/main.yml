@@ -17,7 +17,7 @@ jobs:
     - name: ensure build packages are installed
       run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git 
     - name: build armhf binary
-      run: cd wixlcm; make CROSS_COMPILE="arm-linux-gnueabihf-" all
+      run: cd wixlcm;ls -l; make all
   #    working-directory: wixlcm/
   #  - name: copy armhf bin to output directory
   #    run: cp wixlcm bins/wixlcm-armhf
