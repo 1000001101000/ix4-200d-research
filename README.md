@@ -1,10 +1,9 @@
-ix4-300d
+ix4-200d
 ========
 
-Mainline linux on ix4-300d
+Mainline linux on ix4-200d
 
-The objective was to create a device tree for this device on mainline linux.
+Tools for using Debian on the ix4-200d, an extension of the work done by:
 
-Lenovo ix4-300d is a small 4 bay NAS based on armada XP dual core 78230 armv7 cpu.
-
-see wiki page on github : https://github.com/benoitm974/ix4-300d/wiki 
+https://github.com/benoitm974/ix4-300d/
+https://forum.doozan.com/read.php?2,22623
