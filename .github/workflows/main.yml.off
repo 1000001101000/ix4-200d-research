@@ -6,7 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    container: 'debian:9'
+    container: 'debian:10'
     
     steps:
     - uses: actions/checkout@v1
@@ -16,20 +16,8 @@ jobs:
       run: apt-get update
     - name: ensure build packages are installed
       run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git 
-    - name: build armhf binary
-      run: cd wixlcm;ls -l; make
-  #    working-directory: wixlcm/
-  #  - name: copy armhf bin to output directory
-  #    run: cp wixlcm bins/wixlcm-armhf
-    - name: make clean
-      run: make clean
     - name: build armel binary
-      run: cd wixlcm; make CROSS_COMPILE="arm-linux-gnueabi-" all
-   #   working-directory: wixlcm/
-    #- name: copy armel bin to output directory
-    #  run: cp wixlcm bins/wixlcm-armel
-    - name: make clean
-      run: make clean.
+      run: cd wixlcm;ls -l; make CROSS_COMPILE="arm-linux-gnueabi-" all
    # - name: set git user name
    #   run: git config user.name "workflow@github" 
    # - name: set git user email
