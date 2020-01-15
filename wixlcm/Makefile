@@ -4,6 +4,7 @@ KERNEL_SOURCE ?=
 obj-m += wixlcm.o
 
 all:
+	make ARCH=arm -C $(KERNEL_SOURCE) M=$(PWD) scripts prepare
 	make ARCH=arm -C $(KERNEL_SOURCE) M=$(PWD) modules
 
 clean:
