@@ -3,7 +3,7 @@
  *
  * Author:
  *      Benoit Masson (yahoo@perenite.com)
- *
+ *      Adapted for ix4-200d by Jeremy J. Peper
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
  * may be copied, distributed, and modified under those terms.
@@ -21,9 +21,9 @@
 #include <linux/miscdevice.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
-#include <linux/moduleparam.h>	
+#include <linux/moduleparam.h>
 #include <linux/uaccess.h>
-#include <linux/fs.h>		
+#include <linux/fs.h>
 #include <linux/miscdevice.h>
 #include <linux/mutex.h>
 
@@ -35,20 +35,20 @@
 #include "initImg.h"
 
 /* pin definition */
-#define LCM_BUS_RS                      29      //MPP15 use for RS
-#define LCM_BUS_A0                      30      //MPP34 use for A0
-#define LCM_BUS_CS                      28      //MPP35 use for CS
-#define LCM_BUS_RW              31      //MPP44 use for R/W
-#define LCM_BUS_E               32      //MPP45 use for E
+#define LCM_BUS_RS                      15      //MPP15 use for RS
+#define LCM_BUS_A0                      34      //MPP34 use for A0
+#define LCM_BUS_CS                      35      //MPP35 use for CS
+#define LCM_BUS_RW              44      //MPP44 use for R/W
+#define LCM_BUS_E               45      //MPP45 use for E
 #define LCM_DATA_BITS           8
 
 // Data pin mapping
 //                                 D0  D1  D2  D3  D4  D5  D6  D7
 //--------------------------------------------------------------
-static int data_pin_mapping[8] = { 33, 34, 35, 36, 37, 38, 39, 40 };
+static int data_pin_mapping[8] = { 36, 37, 38, 39, 40, 41, 42, 43 };
 
-#define FIRST_PIN 28
-#define LAST_PIN 40
+#define FIRST_PIN 34
+#define LAST_PIN 45
 
 #define NBLINES 128
 #define NBPAGES	8
