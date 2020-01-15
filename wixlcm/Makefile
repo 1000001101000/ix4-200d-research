@@ -1,7 +1,10 @@
+CROSS_COMPILE ?=
+KERNEL_SOURCE ?=
+
 obj-m += wixlcm.o
 
 all:
-	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C $(KERNEL_SOURCE) M=$(PWD) modules
+	make ARCH=arm -C $(KERNEL_SOURCE) M=$(PWD) modules
 
 clean:
-	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C $(KERNEL_SOURCE) M=$(PWD) clean
+	make ARCH=arm -C $(KERNEL_SOURCE) M=$(PWD) clean
