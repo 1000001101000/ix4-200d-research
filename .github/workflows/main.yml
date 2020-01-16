@@ -15,7 +15,7 @@ jobs:
     - name: update apt
       run: apt-get update
     - name: ensure build packages are installed
-      run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git 
+      run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git libssl-dev
     - name: install default linux source
       run: apt-get -y install linux-source
     - name: unpack source
