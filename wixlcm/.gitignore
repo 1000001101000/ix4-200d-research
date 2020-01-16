@@ -1,0 +1,8 @@
+*.o
+*.ko
+*.mod.*
+.wixlcm.ko.cmd
+.wixlcm.o.cmd
+Module.symvers
+modules.order
+wixlcm.mod
