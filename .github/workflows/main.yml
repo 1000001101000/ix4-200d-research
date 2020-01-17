@@ -23,6 +23,6 @@ jobs:
     - name: add new files to repo if needed
       run: find wixlcm/bins/; git add wixlcm/bins/*
     - name: commit new files
-      run: git commit -a -m "commit binaries built from latest source" || exit 0
+      run: git diff --compact-summary; git commit -v -a -m "commit binaries built from latest source" || exit 0
  #   - name: push changes
  #     run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
