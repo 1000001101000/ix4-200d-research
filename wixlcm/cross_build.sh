@@ -13,7 +13,7 @@ echo $kver
 cd -
 
 echo $(pwd)
-make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all >/dev/null 2>&1
+#make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all >/dev/null 2>&1
 if [ "$?" -ne 0 ]; then
    exit 1
 fi
