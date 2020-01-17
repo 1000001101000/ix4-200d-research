@@ -1,5 +1,5 @@
 name: Generate Binaries
-##guessing this is a major race-condtition issue but interested to see anyway
+##this is a major race-condtition, need to look at how to handle that piece
 on: [push]
 
 jobs:
@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        debv: ['debian:8','debian:9', 'debian:10', 'debian:testing', 'debian:unstable']
+        debv: ['debian:stretch', 'debian:buster', 'debian:buster-backports', 'debian:sid']
    
     container: ${{ matrix.debv }}
     
