@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        debv: ['debian:stretch', 'debian:buster', 'debian:buster-backports', 'debian:bullseye', 'debian:bullseye-backports', 'debian:sid']
+        debv: ['debian:stretch', 'debian:buster', 'debian:stable-backports', 'debian:bullseye', 'debian:testing-backports', 'debian:sid']
    
     container: ${{ matrix.debv }}
     
