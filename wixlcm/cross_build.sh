@@ -7,16 +7,20 @@ if [ "$?" -ne 0 ]; then
    exit 1
 fi
 
-cd "$(ls | grep linux-source)" 
+source_dir="$(ls | grep linux-source)"
+
+cd "$source_dir" 
 kver="$(make kernelversion)"
 echo $kver
 cd -
 
 echo $(pwd)
-#make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all >/dev/null 2>&1
+make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$source_dir" all
 if [ "$?" -ne 0 ]; then
    exit 1
 fi
+
+rm -r "$source_dir"
 
 mkdir -p "bins/$kver/" 2>/dev/null
 
