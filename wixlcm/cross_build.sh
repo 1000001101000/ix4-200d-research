@@ -21,7 +21,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 mkdir -p "bins/$kver/" 2>/dev/null
-cp wixlcm.ko "bins/$kver/"
+cp -v wixlcm.ko "bins/$kver/"
 make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$source_dir" clean
 rm -r "$source_dir"
 
