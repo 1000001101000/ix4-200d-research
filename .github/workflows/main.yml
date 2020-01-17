@@ -21,7 +21,7 @@ jobs:
     - name: set git user email
       run: git config user.email "workflow@github"
     - name: add new files to repo if needed
-      run: git add bins; git add bins/*
+      run: git add wixlcm/bins/*
     - name: commit new files
       run: git commit -a -m "commit binaries built from latest source" || exit 0
  #   - name: push changes
