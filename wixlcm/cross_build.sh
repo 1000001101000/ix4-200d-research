@@ -26,5 +26,7 @@ mkdir -p "bins/$kver/" 2>/dev/null
 
 cp wixlcm.ko "bins/$kver/"
 
+make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$source_dir" clean
+
 find .
 
