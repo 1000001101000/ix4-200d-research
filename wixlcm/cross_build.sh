@@ -9,7 +9,7 @@ fi
 
 cd "$(ls | grep linux-source)" 
 kver="$(make kernelversion)"
-cd --
+cd -
 
 make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all
 if [ "$?" -ne 0 ]; then
