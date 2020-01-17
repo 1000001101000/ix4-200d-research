@@ -18,10 +18,10 @@ jobs:
       run: apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git libssl-dev
     - name: install default linux source
       run: apt-get -y install linux-source
-    - name: unpack source
-      run: cd wixlcm; tar xf "/usr/src/$(ls /usr/src/ | grep linux-source)"
-    - name: build armel binary
-      run: cd wixlcm;ls -l; make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all
+    - name: make
+      run: cd wixlcm; chmod +x *.sh; ./cross_build.sh
+   # - name: build armel binary
+   #   run: cd wixlcm;ls -l; make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$(ls | grep linux-source)" all
    # - name: set git user name
    #   run: git config user.name "workflow@github" 
    # - name: set git user email
