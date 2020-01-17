@@ -1,9 +1,53 @@
 name: Generate Binaries
-
+##guessing this is a major race-condtition issue but interested to see anyway
 on: [push]
 
 jobs:
-  build:
+  build-stretch:
+
+    runs-on: ubuntu-latest
+    container: 'debian:9'
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: ensure build packages are installed
+      run: apt-get update; apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git libssl-dev
+    - name: install default linux source
+      run: apt-get -y install linux-source
+    - name: make
+      run: cd wixlcm; chmod +x *.sh; ./cross_build.sh
+    - name: set git user email
+      run: git config user.email "workflow@github"
+    - name: add new files to repo if needed
+      run: find wixlcm/bins/ | xargs -n1 git add -f
+    - name: commit new files
+      run: git diff --compact-summary; git commit -v -a -m "commit binaries built from latest source" || exit 0
+    - name: push changes
+      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
+      
+  build-buster:
+
+    runs-on: ubuntu-latest
+    container: 'debian:10'
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: ensure build packages are installed
+      run: apt-get update; apt-get -y install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi build-essential git libssl-dev
+    - name: install default linux source
+      run: apt-get -y install linux-source
+    - name: make
+      run: cd wixlcm; chmod +x *.sh; ./cross_build.sh
+    - name: set git user email
+      run: git config user.email "workflow@github"
+    - name: add new files to repo if needed
+      run: find wixlcm/bins/ | xargs -n1 git add -f
+    - name: commit new files
+      run: git diff --compact-summary; git commit -v -a -m "commit binaries built from latest source" || exit 0
+    - name: push changes
+      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
+      
+  build-testing:
 
     runs-on: ubuntu-latest
     container: 'debian:testing'
@@ -16,13 +60,11 @@ jobs:
       run: apt-get -y install linux-source
     - name: make
       run: cd wixlcm; chmod +x *.sh; ./cross_build.sh
-   #- name: set git user name
-   #   run: git config user.name "workflow@github" 
     - name: set git user email
       run: git config user.email "workflow@github"
     - name: add new files to repo if needed
       run: find wixlcm/bins/ | xargs -n1 git add -f
     - name: commit new files
       run: git diff --compact-summary; git commit -v -a -m "commit binaries built from latest source" || exit 0
- #   - name: push changes
- #     run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
+    - name: push changes
+      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
