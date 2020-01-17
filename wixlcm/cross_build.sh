@@ -20,13 +20,10 @@ if [ "$?" -ne 0 ]; then
    exit 1
 fi
 
-rm -r "$source_dir"
-
 mkdir -p "bins/$kver/" 2>/dev/null
-
 cp wixlcm.ko "bins/$kver/"
-
 make CROSS_COMPILE="arm-linux-gnueabi-" KERNEL_SOURCE="$source_dir" clean
+rm -r "$source_dir"
 
 find .
 
