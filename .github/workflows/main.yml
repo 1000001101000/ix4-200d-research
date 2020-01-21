@@ -2,6 +2,7 @@ name: Generate Binaries
 ##this is a major race-condtition, need to look at how to handle that piece
 on: [push]
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
