@@ -1,14 +1,14 @@
-#include <linux/module.h>
+//#include <linux/module.h>
 #include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/miscdevice.h>
+//#include <linux/init.h>
+//#include <linux/miscdevice.h>
 #include <linux/gpio.h>
 #include <linux/delay.h>
-#include <linux/moduleparam.h>
-#include <linux/uaccess.h>
-#include <linux/fs.h>
-#include <linux/miscdevice.h>
-#include <linux/mutex.h>
+//#include <linux/moduleparam.h>
+//#include <linux/uaccess.h>
+//#include <linux/fs.h>
+//#include <linux/miscdevice.h>
+//#include <linux/mutex.h>
 
 #include <linux/string.h>
 #include <asm/string.h>
