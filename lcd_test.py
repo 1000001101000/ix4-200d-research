@@ -3,6 +3,7 @@
 import os
 import time
 from periphery import GPIO
+import initimg
 
 RS = GPIO(15, "out")
 A0 = GPIO(34, "out")
@@ -63,16 +64,16 @@ def exit_lcm():
 	for x in DATA:
 		x.close()
 
-def draw_lcm():
+def draw_lcm(image):
 	write_lcm(A0_CMD,0xae)
 	for page in range(8):
 		write_lcm(A0_CMD,(0xB0 + page))
 		write_lcm(A0_CMD,0x10)
 		write_lcm(A0_CMD,0x00)
 		for line in range(128):
-			write_lcm(A0_DATA, 0xF0)
+			write_lcm(A0_DATA, image[(page*128)+line])
 	write_lcm(A0_CMD,0xaf)
 
 init_lcm()
-draw_lcm()
+draw_lcm(initimg.img)
 exit_lcm()
