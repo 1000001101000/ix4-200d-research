@@ -4,8 +4,8 @@ KERNEL_SOURCE ?=
 obj-m += wixlcm.o
 
 all:
-	make ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C $(KERNEL_SOURCE) mvebu_v5_defconfig
 	make ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C $(KERNEL_SOURCE) scripts prepare
+	make ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C $(KERNEL_SOURCE) oldconfig
 	make ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C $(KERNEL_SOURCE) M=$(PWD) modules
 
 clean:
