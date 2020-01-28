@@ -10,6 +10,8 @@ fi
 source_dir="$(ls | grep linux-source)"
 
 cd "$source_dir" 
+cfg_file="$(find /usr/src/linux-config-* | grep armel_none_marvell | grep xz)"
+xzccat "$cfg_file" > .config
 kver="$(make kernelversion)"
 echo $kver
 cd -
