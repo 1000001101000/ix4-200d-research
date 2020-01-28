@@ -16,7 +16,7 @@ LCD:
 
 I've modified the kernel driver provided by @benoitm974 for the LCD screen to work with the pin layout for this model and added an initial image which displays when it is loaded. I've also modified the Makefile to allow compiling directly on the device or crosscompile as needed. I've also set up a CI/CD workflow to automatically generate binaries for the kernels commonly used by Debian and place them in the bins/ directory.
 
-The kernel module was originally developed for 3.XX kernels and is pretty unstable for modern kernels. The inital image is displaying succesfully for kernel versions <5.4, 5.4+ triggers a kernel panic when loaded unless you disable some stack protection features. Attempting to send commands to the device seems to trigger a segfault so currently I've just used it for a startup display. 
+The kernel module was originally developed for 3.XX kernels and is pretty unstable for modern kernels. The inital image is displaying succesfully but attempting to send commands to the device seems to trigger a segfault so currently I've just used it for testing. 
 
 Rather than try to fix/improve the kernel driver (I'm not much of a kernel developer) I'll be looking at creating a userland solution using Python/etc. In theory pyLCD should be able to drive it though I haven't had much luck getting it to install on Vanilla Debian.
 
