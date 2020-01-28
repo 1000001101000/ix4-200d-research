@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        debv: ['debian:oldstable', 'debian:stable', 'debian:stable-backports', 'debian:testing', 'debian:unstable', 'debian:experimental']
+        debv: ['debian:stable', 'debian:stable-backports', 'debian:testing', 'debian:unstable', 'debian:experimental']
    
     container: ${{ matrix.debv }}
     
