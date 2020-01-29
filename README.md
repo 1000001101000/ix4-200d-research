@@ -30,6 +30,8 @@ I've identified 2 additional i2c devices at 0x20 and 0x64, I currently do not kn
 
 The brightness of the LCD and LEDs are controlled by the adt7473 (same as for ix4-300d). It can be set via /sys/class/i2c-adapter/i2c-0/0-002e/pwm3
 
+The leds require the gpio-74x164 module to be compiled and loaded
+
 I suspect the sata led is tied directly to the sata controller but have not been able to verify that, see below.
 
 Installation:
