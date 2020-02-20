@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
 import os
-import time
 from periphery import GPIO
-import initimg
+from PIL import Image
 
 RS = GPIO(15, "out")
 A0 = GPIO(34, "out")
@@ -64,16 +63,40 @@ def exit_lcm():
 	for x in DATA:
 		x.close()
 
+def set_page(page):
+	write_lcm(A0_CMD,(0xB0 + page))
+	write_lcm(A0_CMD,0x10)
+	write_lcm(A0_CMD,0x00)
+
 def draw_lcm(image):
 	write_lcm(A0_CMD,0xae)
 	for page in range(8):
-		write_lcm(A0_CMD,(0xB0 + page))
-		write_lcm(A0_CMD,0x10)
-		write_lcm(A0_CMD,0x00)
+		set_page(page)
 		for line in range(128):
 			write_lcm(A0_DATA, image[(page*128)+line])
 	write_lcm(A0_CMD,0xaf)
 
+def draw_file(path):
+	img = [0x00] * 1024
+	im = Image.open(path)
+	pixels = im.load()
+
+	width  = im.size[0]
+	height = im.size[1]
+
+	if width > 128:
+		width = 128
+	if height > 64:
+		height = 64
+	for y in range(int(height/8)):
+		for x in range(width):
+			outbyte = 0x00
+			for bit in range(8):
+				if pixels[x,(y*8)+bit] != 0:
+					outbyte += 2**bit
+			img[x+(128*y)] = outbyte
+	draw_lcm(img)
+
 init_lcm()
-draw_lcm(initimg.img)
+draw_file("example.bmp")
 exit_lcm()
