@@ -24,12 +24,19 @@ A0_DATA = 0x01
 A0_CMD  = 0x00
 
 def set_gpio(pin,value):
+	pin.direction = "out"
 	if value == 0:
 		outval = False
 	else:
 		outval = True
-
 	pin.write(outval)
+
+def read_gpio(pin):
+	pin.direction = "in"
+	if pin.read():
+		return 1
+	else:
+		return 0
 
 def write_lcm(A0type, input):
 	mask=128
@@ -43,6 +50,52 @@ def write_lcm(A0type, input):
 	set_gpio(E,1)
 	set_gpio(E,0)
 	set_gpio(CS,1)
+
+def read_lcm(page,line):
+	set_page(page)
+	output = 0x00
+	for i in range(line):
+		output = 0x00
+		set_gpio(E,0)
+		set_gpio(A0,A0_DATA)
+		set_gpio(RW,1)
+		set_gpio(CS,0)
+		set_gpio(E,1)
+		mask=128
+		for pin in DATA:
+			pin.direction = "in"
+			if pin.read():
+				output += mask
+			mask=int(mask/2)
+		set_gpio(E,0)
+		set_gpio(CS,1)
+	print(hex(output))
+
+def read_lcm_img():
+	outimg = [0] * 8192
+	for page in range(8):
+		set_page(page)
+		for line in range(128):
+			set_gpio(E,0)
+			set_gpio(A0,A0_DATA)
+			set_gpio(RW,1)
+			set_gpio(CS,0)
+			set_gpio(E,1)
+			outimg[(page*8*128)+(0*128)+line] = read_gpio(D0)
+			outimg[(page*8*128)+(1*128)+line] = read_gpio(D1)
+			outimg[(page*8*128)+(2*128)+line] = read_gpio(D2)
+			outimg[(page*8*128)+(3*128)+line] = read_gpio(D3)
+			outimg[(page*8*128)+(4*128)+line] = read_gpio(D4)
+			outimg[(page*8*128)+(5*128)+line] = read_gpio(D5)
+			outimg[(page*8*128)+(6*128)+line] = read_gpio(D6)
+			outimg[(page*8*128)+(7*128)+line] = read_gpio(D7)
+			set_gpio(E,0)
+			set_gpio(CS,1)
+
+	for y in range(64):
+		for x in range(128):
+			print(outimg[(y*128)+x],end="")
+		print("")
 
 def init_lcm():
 	set_gpio(RS,1)
@@ -99,4 +152,5 @@ def draw_file(path):
 
 init_lcm()
 draw_file("example.bmp")
+read_lcm_img()
 exit_lcm()
